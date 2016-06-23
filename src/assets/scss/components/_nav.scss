@@ -1,0 +1,197 @@
+//navbar styles
+
+.no-js {
+  @include breakpoint(small only) {
+    .top-bar {
+      display: none;
+    }
+  }
+  @include breakpoint(medium only) {
+    .top-bar {
+      display: none;
+    }
+  }
+
+  @include breakpoint(large) {
+    .title-bar {
+      display: none;
+    }
+  }
+}
+
+.sticky-container {
+	position: fixed;
+	z-index: 100;
+	top: 0;
+	width: 100%;
+	
+	@include breakpoint(large) {
+		position: relative;
+		top: auto;
+	}
+}
+
+.title-bar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+	
+	img {
+		max-height: 32px;
+		
+		&.logo {
+			margin-right: 15px;
+		}
+	}
+	
+	.menu-icon {
+		width: 25px;
+		
+		&:after {
+			transition: all 0.1s linear;
+			background: $black;
+			box-shadow: 0 8px 0 $black, 0 16px 0 $black;
+		}
+		
+		&.menu-open {
+			margin-top: 10px;
+			
+			&:before {
+				transition: all 0.1s linear;
+				content: '';
+				position: absolute;
+				display: block;
+				width: 100%;
+				height: 2px;
+				background: $black;
+				top: 0;
+				left: 0;
+				transform: rotate(-45deg);
+			}
+			
+			&:after {
+				box-shadow: none;
+				transform: rotate(45deg);
+			}
+		}
+	}
+	
+}
+
+
+#nav_main {
+  	position: fixed;
+  	top: 54px;
+  	z-index: 10;
+  	width: 100%;
+  	font-family: $body-font-family;
+  	font-size: $nav-font-size;
+  	text-transform: uppercase;
+  	letter-spacing: 1px;
+  	background-color: $blue-dark;
+  	
+  	@include breakpoint(large) {
+	  	top: 0;
+	  	background-color: $white; 
+	  	height: 210px;
+	  	transition: height 0.2s linear;
+	  	
+	  	&.shrink {
+		  	height: 95px;
+	  	}
+	}
+  	
+  	&.top-bar {
+	  	padding: 0;
+	  	
+	  	ul {
+		  	background: none;
+	  	}
+  	}
+            
+	
+	.menu {
+		position: relative;
+		>li {
+			margin: 0;
+			
+			>a {
+				color: $white;
+				padding: 1rem;
+				border-bottom: 1px solid $light-gray;
+				transition: color 0.2s linear;
+				
+				@include breakpoint(large) {
+					color: $black;
+					padding: 1rem 0.4rem;
+					color: $black;
+					border-bottom: none;
+				}
+
+				@include breakpoint(xlarge) {
+					padding: 1rem;
+				}
+				
+				@include breakpoint(xxlarge) {
+					padding: 1rem 2rem;
+				}
+								
+				&:hover {
+					color: $red;
+				}
+			}
+			
+			.logocontainer {
+				width: 310px;
+				height: 140px;
+				background: url(/assets/img/logo_gc.png) center top no-repeat;
+				transition: height 0.2s linear;
+				overflow: hidden;
+				
+				>a {
+					display: block;
+					width: 100%;
+					height: 100%;
+				}
+			}
+/*
+			&.active {
+ 				border-bottom: 0.4rem solid $color-orange;
+				
+				>a {
+					
+					padding: 1rem;
+ 					color: $color-orange;
+					background: none;
+					
+					@include breakpoint(large) {
+						padding: 2.3rem 0 1.8rem;
+					}
+				}
+			}
+*/
+		
+			@include breakpoint(large) {
+				&:not(.show-for-large) {
+					margin-top: 43px;
+					transition: margin-top 0.2s linear;
+				}
+				
+			}	
+		}
+	}
+	
+	&.shrink {
+		.menu {
+			>li {
+				margin-top: 0;
+
+				.logocontainer {
+					height: 55px;
+				}
+						
+			}
+		}
+	}
+}
