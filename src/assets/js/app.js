@@ -18,7 +18,7 @@ $(".menu li a").click(function() {
 
 
 //photo animation
-var photo = $('.photo.row, #who-we-are .content, .points, #team .row');
+var photo = $('.photo.row, #who-we-are .content, .points .row, #team .row');
 
 photo.addClass('animate');
 
@@ -60,14 +60,57 @@ $('#contact-form input, #contact-form textarea').on('blur',function(){
 });
 
 
+
+// Form
+var contactform = $('#contact-form'),
+	newsletterform = $('#mc-embedded-subscribe-form'),
+	formMessages = $('#form-messages'),
+	spinner = '<div class="sk-fading-circle"><div class="sk-circle1 sk-circle"></div><div class="sk-circle2 sk-circle"></div><div class="sk-circle3 sk-circle"></div><div class="sk-circle4 sk-circle"></div><div class="sk-circle5 sk-circle"></div><div class="sk-circle6 sk-circle"></div><div class="sk-circle7 sk-circle"></div><div class="sk-circle8 sk-circle"></div><div class="sk-circle9 sk-circle"></div><div class="sk-circle10 sk-circle"></div><div class="sk-circle11 sk-circle"></div><div class="sk-circle12 sk-circle"></div></div>';
+
+$(contactform).submit(function(e) {
+	e.preventDefault();
+	
+	$(contactform).find('button').addClass('sending').html('Sending... ' + spinner);
+
+	var formData = $(contactform).serialize();
+
+/*
+	$.ajax({
+		type: 'POST',
+		url: $(contactform).attr('action'),
+		data: formData
+	})
+*/
+	$.ajax({
+	    url: "https://formspree.io/info@grandcrossing.com", 
+	    method: "POST",
+	    data: formData,
+	    dataType: "json"
+	})
+	.done(function() {
+		$(formMessages).removeClass('error');
+		$(formMessages).addClass('success');
+		$(formMessages).text('');
+		$(contactform).find('button').removeClass('sending').text('Thank you.');
+		//$('#contact-form input, #contact-form textarea').val('');
+	})
+	.fail(function() {
+		$(contactform).find('button').text('Submit message');
+		$(formMessages).removeClass('success');
+		$(formMessages).addClass('error');
+		$(formMessages).text('Sorry - your message could not be sent. Please try again.');
+	});
+
+});
+
+
+
 //Google map
 var vendormarkers = [];
 
 $(function() {
 	
   if ($('#googlemap').length) {
-
-	// Google maps
 	
 	var mapDiv = document.getElementById('googlemap');
 	
