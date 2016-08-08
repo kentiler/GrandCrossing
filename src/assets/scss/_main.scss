@@ -398,9 +398,8 @@ img.responsive {
 		}
 	}
 	
-	.large-4 {
-		padding: 2rem 3rem;
-		
+	.columns {
+		//padding: 2rem 3rem;
 		
 		@include breakpoint(medium down) {
 			height: auto;
@@ -426,7 +425,7 @@ img.responsive {
 				transition: color 0.2s ease;
 				
 				&:hover {
-					color: $red;
+					color: $yellow;
 				}
 								
 				@include breakpoint(medium down) {
